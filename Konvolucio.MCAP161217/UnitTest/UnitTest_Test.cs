@@ -76,11 +76,5 @@ namespace Konvolucio.MCAP161217.UnitTest
             Console.WriteLine("Hello World");
         }
 
-        [Test]
-        public void BetterNewTest()
-        {
-            Console.WriteLine("Hello World");
-        }
-
     }
 }
