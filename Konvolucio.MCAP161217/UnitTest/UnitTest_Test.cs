@@ -82,5 +82,11 @@ namespace Konvolucio.MCAP161217.UnitTest
             Console.WriteLine("Hello World");
         }
 
+        [Test]
+        public void NewFeatures()
+        {
+            Console.WriteLine("Hello World");
+        }
+
     }
 }
