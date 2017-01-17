@@ -73,7 +73,7 @@ namespace Konvolucio.MCAP161217.UnitTest
         [Test]
         public void NewTest()
         {
-            Console.WriteLine("Hello World");
+
         }
 
         [Test]
