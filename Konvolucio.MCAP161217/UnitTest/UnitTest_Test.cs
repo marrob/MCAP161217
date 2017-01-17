@@ -70,10 +70,5 @@ namespace Konvolucio.MCAP161217.UnitTest
             Console.WriteLine(@"Phase: " + phase.ToString());
         }
 
-        [Test]
-        public void NewTest()
-        {
-            Console.WriteLine("Hello World");
-        }
     }
 }
