@@ -3,7 +3,10 @@ namespace Konvolucio.MCAP161217.UnitTest
 {
     using System;
     using System.Collections.Generic;
+    using System.Drawing.Drawing2D;
+    using System.IO;
     using System.Linq;
+    using System.Net.Configuration;
     using System.Text;
     using NUnit.Framework;
     using System.Numerics;
@@ -70,10 +73,200 @@ namespace Konvolucio.MCAP161217.UnitTest
             Console.WriteLine(@"Phase: " + phase.ToString());
         }
 
+        /// <summary>
+        /// https://batchloaf.wordpress.com/2013/12/07/simple-dft-in-c/
+        /// </summary>
         [Test]
-        public void NewTest()
+        public void DftBruteForce()
         {
-            Console.WriteLine("Hello World");
+
+            // time and frequency domain data arrays
+            int n, k, N;            // indices for time and frequency domains
+            double[] x;             // discrete-time signal, x
+            double[] Xre, Xim;      // DFT of x (real and imaginary parts)
+            double[] P;             // power spectrum of x
+
+            N = 100;
+
+            x = new double[N];
+            Xre = new double[N];
+            Xim = new double[N];
+            P= new double[N];
+
+            // Calculate DFT of x using brute force
+            for (k = 0; k < N; ++k)
+            {
+                // Real part of X[k]
+                Xre[k] = 0;
+                for (n = 0; n < N; ++n) Xre[k] += x[n] * Math.Cos(n * k * 2 * Math.PI / N);
+
+                // Imaginary part of X[k]
+                Xim[k] = 0;
+                for (n = 0; n < N; ++n) Xim[k] -= x[n] * Math.Sin(n * k * 2 * Math.PI / N);
+
+                // Power at kth frequency bin
+                P[k] = Xre[k] * Xre[k] + Xim[k] * Xim[k];
+            }
+        }
+
+
+        public void DftBruteForce(double[] signal)
+        {
+            // time and frequency domain data arrays
+            int n, k, N;            // indices for time and frequency domains
+            double[] Xre, Xim;      // DFT of x (real and imaginary parts)
+            double[] P;             // power spectrum of x
+
+            N = signal.Length;
+            Xre = new double[N];
+            Xim = new double[N];
+            P = new double[N];
+
+            // Calculate DFT of x using brute force
+            for (k = 0; k < N; ++k)
+            {
+                // Real part of X[k]
+                Xre[k] = 0;
+                for (n = 0; n < N; ++n) Xre[k] += signal[n] * Math.Cos(n * k * 2 * Math.PI / N);
+
+                // Imaginary part of X[k]
+                Xim[k] = 0;
+                for (n = 0; n < N; ++n) Xim[k] -= signal[n] * Math.Sin(n * k * 2 * Math.PI / N);
+
+                // Power at kth frequency bin
+                P[k] = Xre[k] * Xre[k] + Xim[k] * Xim[k];
+            }
+
+            DoubleArrayToFile(P, "D:\\power2.csv");
+        }
+
+        [Test]
+        public void LoadTestVector()
+        {
+
+            DftBruteForce(FileToDoubleArray("D:\\sine2.csv"));
+        }
+
+        [Test]
+        public void CreateTestVector()
+        {
+            string line = string.Empty;
+            int maxCycle = 100;
+            double maxRes = Math.PI/20;
+
+            double[]  values = new double[maxCycle * (int)((Math.PI*2)/(Math.PI/ 20))];
+
+            int index = 0;
+
+            for (int cycle = 0; cycle < maxCycle; cycle++)
+            {
+                for (double p = 0; p < 2*Math.PI; p += maxRes)
+                {
+                    values[index++] = Math.Sin(p);
+                }
+            }
+
+            DoubleArrayToFile(values, "D:\\tesztvector.csv");
+        }
+
+
+
+        [Test]
+        public void CreateTest0002()
+        {
+           var signal =  SequenceGenerator( amplitude: 1,
+                                             cycleNum: 1,
+                                             resolution: Math.PI/1000,
+                                             phase: Math.PI / 2,
+                                             offset: 0);
+
+            DoubleArrayToFile(signal, "D:\\tesztvector.csv");
+        }
+
+        [Test]
+        public void CreateTest0003()
+        {
+            var signal = SequenceGenerator(amplitude: 128,
+                                              cycleNum: 1,
+                                              resolution: Math.PI / 1000,
+                                              phase: 0,
+                                              offset: 128);
+
+            DoubleArrayToFile(signal, "D:\\tesztvector.csv");
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="amplitude"></param>
+        /// <param name="cycleNum">The periodic count. eg.:1,2,3...n</param>
+        /// <param name="resolution">Period resolution  in radian. min: 2*Math.PI , or Math.PI/20 </param>
+        /// <param name="phase">Phase in radian. eg.: Math.PI/2 = 90degree </param>
+        /// <param name="offset"></param>
+        /// <returns></returns>
+        public static double[] SequenceGenerator(   double amplitude,
+                                                    int cycleNum,
+                                                    double resolution,
+                                                    double phase,
+                                                    double offset)
+        {
+            double[] squence = new double[0];
+            int index = 0;
+            for (int cycle = 0; cycle < cycleNum; cycle++)
+                for (double p = 0; p <= (2 * Math.PI); p += resolution)
+                {
+                    Array.Resize(ref squence, index + 1);
+                    squence[index++] = amplitude * Math.Sin(p + phase) + offset;   
+                }
+
+            return squence;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="path"></param>
+        /// <returns></returns>
+        static double[] FileToDoubleArray(string path)
+        {
+            FileInfo f = new FileInfo(path);
+            int lines = 0;
+            double[] values = new double[0];
+            if (f.Exists)
+            {
+                using (var sr = new StreamReader(path))
+                {
+                    string line = null;
+                    do
+                    {
+                        line = sr.ReadLine();
+                        if (line != null)
+                        {
+                            Array.Resize(ref values, lines + 1);
+                            values[lines++] = double.Parse(line);
+                        }
+                    } while (line != null);
+                }
+            }
+            return values;
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="data"></param>
+        /// <param name="path"></param>
+        static void DoubleArrayToFile(double[] data, string path)
+        {
+            var f = new FileInfo(path);
+            if (f.Exists)
+                f.Delete();
+
+            var sw = new StreamWriter(path);
+            foreach (var value in data)
+                sw.WriteLine(value.ToString());
+            
         }
 
     }
