@@ -1,0 +1,26 @@
+﻿
+namespace Konvolucio.MCAP161217.Device
+{
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+
+    public class DeviceException : Exception
+    {
+             
+        public DeviceException()
+        {
+        }
+
+        public DeviceException(string message)
+            : base(message)
+        {
+        }
+
+        public DeviceException(string message, Exception inner)
+            : base(message, inner)
+        {
+        }
+    }
+}
