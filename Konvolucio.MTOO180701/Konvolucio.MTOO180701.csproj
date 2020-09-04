@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8D63D1E5-D0E4-4080-8299-FC3FAF5F404B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Konvolucio.MTOO180701</RootNamespace>
+    <AssemblyName>Konvolucio.MTOO180701</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="nunit.framework, Version=2.6.4.14350, Culture=neutral, PublicKeyToken=96d09a1eb7f44a77, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>C:\Program Files\NUnit.org\framework\3.4.1.0\net-4.0\nunit.framework.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppConstants.cs" />
+    <Compile Include="Commands\HowIsWorkingCommand.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Commands\UpdatesCommands.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Common\BinarySuffixes.cs" />
+    <Compile Include="Common\PropertyPlus.cs" />
+    <Compile Include="Common\SuffixFormatter.cs" />
+    <Compile Include="Controls\ParamControl.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Controls\ParamControl.Designer.cs">
+      <DependentUpon>ParamControl.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Moduls\ComplexImpeadance\Model.cs" />
+    <Compile Include="Moduls\ComplexImpeadance\Presenter.cs" />
+    <Compile Include="Moduls\RLC\VectorRatioDetector\Page.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Moduls\RLC\VectorRatioDetector\Page.Designer.cs">
+      <DependentUpon>Page.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Moduls\RLC\VectorRatioDetector\Presenter.cs" />
+    <Compile Include="Moduls\RLC\VectorRatioDetector\UnitTest.cs" />
+    <Compile Include="Moduls\RLC\VectorRatioDetector\VectorRatioDetector.cs" />
+    <Compile Include="Moduls\SeriesRC\UnitTest.cs" />
+    <Compile Include="Moduls\SeriesRC\VectorRatioDetector.cs" />
+    <Compile Include="Moduls\SeriesRC\Page.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Moduls\SeriesRC\Page.Designer.cs">
+      <DependentUpon>Page.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Moduls\SeriesRC\Presenter.cs" />
+    <Compile Include="Common\UnitTest_PropertyPlus.cs" />
+    <Compile Include="Common\UnitTest_Suffix.cs" />
+    <Compile Include="Common\IModulDescriptor.cs" />
+    <Compile Include="Moduls\Test\Page.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Moduls\Test\Page.Designer.cs">
+      <DependentUpon>Page.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Moduls\Test\Presenter.cs" />
+    <Compile Include="UnitTest\UnitTest_LabviewFFT.cs" />
+    <Compile Include="View\HowIsWorkingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\HowIsWorkingForm.Designer.cs" />
+    <Compile Include="View\MainForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UnitTest\UnitTest_Test.cs" />
+    <Compile Include="View\UpdatesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="View\UpdatesForm.designer.cs">
+      <DependentUpon>UpdatesForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Moduls\ComplexImpeadance\Page.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="Moduls\ComplexImpeadance\Page.Designer.cs">
+      <DependentUpon>Page.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Controls\ParamControl.resx">
+      <DependentUpon>ParamControl.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Moduls\RLC\VectorRatioDetector\Page.resx">
+      <DependentUpon>Page.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Moduls\SeriesRC\Page.resx">
+      <DependentUpon>Page.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Moduls\Test\Page.resx">
+      <DependentUpon>Page.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\HowIsWorkingForm.resx">
+      <DependentUpon>HowIsWorkingForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <EmbeddedResource Include="View\UpdatesForm.resx">
+      <DependentUpon>UpdatesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Moduls\ComplexImpeadance\Page.resx">
+      <DependentUpon>Page.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\AgilentImpedanceHandbookFigure2-5.JPG" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
